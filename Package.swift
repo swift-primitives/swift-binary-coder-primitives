@@ -26,6 +26,7 @@ let package = Package(
         .package(path: "../swift-input-primitives"),
         .package(path: "../swift-witness-primitives"),
         .package(path: "../swift-coder-primitives"),
+        .package(path: "../swift-either-primitives"),
     ],
     targets: [
         .target(
@@ -35,6 +36,7 @@ let package = Package(
                 .product(name: "Binary Machine Primitives", package: "swift-binary-parser-primitives"),
                 .product(name: "Witness Primitives", package: "swift-witness-primitives"),
                 .product(name: "Coder Primitives", package: "swift-coder-primitives"),
+                .product(name: "Either Primitives", package: "swift-either-primitives"),
             ]
         ),
         .target(

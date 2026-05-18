@@ -6,20 +6,24 @@
 //
 
 public import Coder_Primitives
+public import Either_Primitives
 
 extension Binary.Coder: Coder.`Protocol` {
-    public typealias DecodeInput = Binary.Bytes.Input
-    public typealias EncodeBuffer = [UInt8]
-    public typealias DecodeFailure = Binary.Bytes.Machine.Fault
-    public typealias EncodeFailure = Never
+    public typealias Input   = Byte.Input
+    public typealias Buffer  = [UInt8]
+    public typealias Failure = Either<Binary.Bytes.Machine.Fault, Never>
 
     @inlinable
-    public func decode(_ input: inout Binary.Bytes.Input) throws(Binary.Bytes.Machine.Fault) -> Output {
-        try self.decode(&input)
+    public func parse(_ input: inout Byte.Input) throws(Failure) -> Output {
+        do {
+            return try self.decode(&input)   // stored closure, unchanged
+        } catch {
+            throw .left(error)
+        }
     }
 
     @inlinable
-    public func encode(_ output: Output, into buffer: inout [UInt8]) {
-        self.encode(output, &buffer)
+    public func serialize(_ output: Output, into buffer: inout [UInt8]) {
+        self.encode(output, &buffer)         // stored closure, unchanged
     }
 }
