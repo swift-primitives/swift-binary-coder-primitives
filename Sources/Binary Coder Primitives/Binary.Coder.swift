@@ -5,7 +5,7 @@
 //  Witness-based bidirectional coder with separate decode/encode types.
 //
 //  Parsing input and printing output are different algebraic operations:
-//  - Decoding: streaming + checkpoint/restore (Binary.Bytes.Input)
+//  - Decoding: streaming + checkpoint/restore (Byte.Input)
 //  - Encoding: mutable, insertable buffer ([UInt8])
 //
 //  This witness separates these concerns cleanly.
@@ -18,7 +18,7 @@ extension Binary {
     ///
     /// Unlike `Parser.ParserPrinter` which requires the same `Input` type for both
     /// directions, `Coder` uses the appropriate type for each operation:
-    /// - Decoding from `Binary.Bytes.Input` (read-only cursor)
+    /// - Decoding from `Byte.Input` (read-only cursor)
     /// - Encoding into `[UInt8]` (mutable buffer)
     ///
     /// ## Example
@@ -42,7 +42,7 @@ extension Binary {
     /// ```
     public struct Coder<Output>: Witness.`Protocol` {
         /// Decodes a value from a read-only byte cursor.
-        public var decode: (inout Binary.Bytes.Input) throws(Binary.Bytes.Machine.Fault) -> Output
+        public var decode: (inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output
 
         /// Encodes a value into a mutable byte buffer.
         public var encode: (Output, inout [UInt8]) -> Void
@@ -50,7 +50,7 @@ extension Binary {
         /// Creates a coder with the given decode and encode operations.
         @inlinable
         public init(
-            decode: @escaping (inout Binary.Bytes.Input) throws(Binary.Bytes.Machine.Fault) -> Output,
+            decode: @escaping (inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output,
             encode: @escaping (Output, inout [UInt8]) -> Void
         ) {
             self.decode = decode
@@ -69,7 +69,7 @@ extension Binary.Coder {
     /// - Throws: `Binary.Bytes.Machine.Fault` if decoding fails or bytes remain.
     @inlinable
     public func decodeWhole(_ bytes: [UInt8]) throws(Binary.Bytes.Machine.Fault) -> Output {
-        var input = Binary.Bytes.Input(bytes)
+        var input = Byte.Input(bytes)
         let value = try decode(&input)
         guard input.isEmpty else {
             throw .expectedEnd(remaining: input.count)
@@ -83,7 +83,7 @@ extension Binary.Coder {
     /// - Returns: The decoded value.
     /// - Throws: `Binary.Bytes.Machine.Fault` if decoding fails.
     @inlinable
-    public func decodePrefix(_ input: inout Binary.Bytes.Input) throws(Binary.Bytes.Machine.Fault) -> Output {
+    public func decodePrefix(_ input: inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output {
         try decode(&input)
     }
 

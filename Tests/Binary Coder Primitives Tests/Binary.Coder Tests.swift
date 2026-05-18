@@ -39,7 +39,7 @@ extension BinaryCoderTests.Unit {
             Binary.Bytes.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
-        var input = Binary.Bytes.Input([0x42, 0xFF, 0xFF])
+        var input = Byte.Input([0x42, 0xFF, 0xFF])
 
         let value = try coder.decodePrefix(&input)
 
@@ -145,7 +145,7 @@ extension BinaryCoderTests.Integration {
     @Test
     func `sequential decode with prefix`() throws {
         let byteCoder = UInt8.coder(endianness: .big)
-        var input = Binary.Bytes.Input([0x01, 0x02, 0x03])
+        var input = Byte.Input([0x01, 0x02, 0x03])
 
         let first = try byteCoder.decodePrefix(&input)
         let second = try byteCoder.decodePrefix(&input)
