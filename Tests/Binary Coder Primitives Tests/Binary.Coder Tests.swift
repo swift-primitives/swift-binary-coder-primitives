@@ -25,7 +25,7 @@ extension BinaryCoderTests.Unit {
     func `decodeWhole decodes complete input`() throws {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
 
         let value = try coder.decodeWhole([0x42])
@@ -37,7 +37,7 @@ extension BinaryCoderTests.Unit {
     func `decodePrefix consumes only needed bytes`() throws {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
         var input = Byte.Input([0x42, 0xFF, 0xFF])
 
@@ -51,7 +51,7 @@ extension BinaryCoderTests.Unit {
     func `encodeToArray creates new array`() {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
 
         let bytes = coder.encodeToArray(0x42)
@@ -63,9 +63,9 @@ extension BinaryCoderTests.Unit {
     func `encodeAppending appends to existing buffer`() {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
-        var buffer: [UInt8] = [0x00, 0x01]
+        var buffer: [Byte] = [0x00, 0x01]
 
         coder.encodeAppending(0x42, to: &buffer)
 
@@ -81,7 +81,7 @@ extension BinaryCoderTests.EdgeCase {
     func `decodeWhole throws when bytes remain`() {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
 
         #expect(throws: Binary.Machine.Fault.self) {
@@ -93,7 +93,7 @@ extension BinaryCoderTests.EdgeCase {
     func `decodeWhole throws on empty input when decode fails`() {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
 
         #expect(throws: Binary.Machine.Fault.self) {

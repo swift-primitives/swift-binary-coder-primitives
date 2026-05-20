@@ -32,7 +32,7 @@ extension BinaryCoderProtocolTests.Unit {
     func `parse via Coder.Protocol surface decodes complete input`() throws {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
         var input = Byte.Input([0x42])
 
@@ -45,9 +45,9 @@ extension BinaryCoderProtocolTests.Unit {
     func `serialize via Coder.Protocol surface appends bytes to buffer`() throws {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
-        var buffer: [UInt8] = [0x00, 0x01]
+        var buffer: [Byte] = [0x00, 0x01]
 
         try coder.serialize(0x42, into: &buffer)
 
@@ -58,10 +58,10 @@ extension BinaryCoderProtocolTests.Unit {
     func `round-trip via Coder.Protocol surface preserves value`() throws {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
 
-        var buffer: [UInt8] = []
+        var buffer: [Byte] = []
         try coder.serialize(0xAB, into: &buffer)
 
         var input = Byte.Input(buffer)
@@ -79,7 +79,7 @@ extension BinaryCoderProtocolTests.EdgeCase {
     func `parse via Coder.Protocol surface throws Either left on empty input`() throws {
         let coder = Binary.Coder.machine(
             Binary.Machine.u8Parser(),
-            encode: { value, output in output.append(value) }
+            encode: { value, output in output.append(Byte(value)) }
         )
         var input = Byte.Input([])
 
