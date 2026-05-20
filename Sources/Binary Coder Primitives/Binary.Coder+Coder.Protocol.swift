@@ -10,7 +10,7 @@ public import Either_Primitives
 
 extension Binary.Coder: Coder.`Protocol` {
     public typealias Input   = Byte.Input
-    public typealias Buffer  = [UInt8]
+    public typealias Buffer  = [Byte]
     public typealias Failure = Either<Binary.Bytes.Machine.Fault, Never>
 
     @inlinable
@@ -23,7 +23,7 @@ extension Binary.Coder: Coder.`Protocol` {
     }
 
     @inlinable
-    public func serialize(_ output: Output, into buffer: inout [UInt8]) {
+    public func serialize(_ output: Output, into buffer: inout [Byte]) {
         self.encode(output, &buffer)         // stored closure, unchanged
     }
 }

@@ -20,13 +20,13 @@ extension Int8 {
     /// let coder = Int8.coder(endianness: .big)
     ///
     /// // Decode
-    /// let bytes: [UInt8] = [0xFF, 0x00]
+    /// let bytes: [Byte] = [0xFF, 0x00]
     /// var input = Input.Slice(bytes[...])
     /// let value = try coder.decodePrefix(&input)
     /// // value == -1, input has [0x00] remaining
     ///
     /// // Encode
-    /// var output: [UInt8] = []
+    /// var output: [Byte] = []
     /// coder.encodeAppending(-1, to: &output)
     /// // output == [0xFF]
     /// ```
@@ -35,7 +35,7 @@ extension Int8 {
         Binary.Coder.machine(
             Binary.Bytes.Machine.i8Parser(),
             encode: { value, output in
-                output.append(UInt8(bitPattern: value))
+                output.append(Byte(UInt8(bitPattern: value)))
             }
         )
     }

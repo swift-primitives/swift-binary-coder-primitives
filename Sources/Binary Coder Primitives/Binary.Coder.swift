@@ -6,7 +6,7 @@
 //
 //  Parsing input and printing output are different algebraic operations:
 //  - Decoding: streaming + checkpoint/restore (Byte.Input)
-//  - Encoding: mutable, insertable buffer ([UInt8])
+//  - Encoding: mutable, insertable buffer ([Byte])
 //
 //  This witness separates these concerns cleanly.
 //
@@ -19,7 +19,7 @@ extension Binary {
     /// Unlike `Parser.ParserPrinter` which requires the same `Input` type for both
     /// directions, `Coder` uses the appropriate type for each operation:
     /// - Decoding from `Byte.Input` (read-only cursor)
-    /// - Encoding into `[UInt8]` (mutable buffer)
+    /// - Encoding into `[Byte]` (mutable buffer)
     ///
     /// ## Example
     ///
@@ -31,12 +31,12 @@ extension Binary {
     ///         return UInt16(hi) << 8 | UInt16(lo)
     ///     },
     ///     encode: { value, output in
-    ///         output.append(UInt8(truncatingIfNeeded: value))
-    ///         output.append(UInt8(truncatingIfNeeded: value >> 8))
+    ///         output.append(Byte(UInt8(truncatingIfNeeded: value)))
+    ///         output.append(Byte(UInt8(truncatingIfNeeded: value >> 8)))
     ///     }
     /// )
     ///
-    /// let bytes: [UInt8] = [0x34, 0x12]
+    /// let bytes: [Byte] = [0x34, 0x12]
     /// let value = try coder.decodeWhole(bytes)  // 0x1234
     /// let encoded = coder.encodeToArray(value)  // [0x34, 0x12]
     /// ```
@@ -45,13 +45,13 @@ extension Binary {
         public var decode: (inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output
 
         /// Encodes a value into a mutable byte buffer.
-        public var encode: (Output, inout [UInt8]) -> Void
+        public var encode: (Output, inout [Byte]) -> Void
 
         /// Creates a coder with the given decode and encode operations.
         @inlinable
         public init(
             decode: @escaping (inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output,
-            encode: @escaping (Output, inout [UInt8]) -> Void
+            encode: @escaping (Output, inout [Byte]) -> Void
         ) {
             self.decode = decode
             self.encode = encode
@@ -68,7 +68,7 @@ extension Binary.Coder {
     /// - Returns: The decoded value.
     /// - Throws: `Binary.Bytes.Machine.Fault` if decoding fails or bytes remain.
     @inlinable
-    public func decodeWhole(_ bytes: [UInt8]) throws(Binary.Bytes.Machine.Fault) -> Output {
+    public func decodeWhole(_ bytes: [Byte]) throws(Binary.Bytes.Machine.Fault) -> Output {
         var input = Byte.Input(bytes)
         let value = try decode(&input)
         guard input.isEmpty else {
@@ -92,8 +92,8 @@ extension Binary.Coder {
     /// - Parameter value: The value to encode.
     /// - Returns: The encoded bytes.
     @inlinable
-    public func encodeToArray(_ value: Output) -> [UInt8] {
-        var out: [UInt8] = []
+    public func encodeToArray(_ value: Output) -> [Byte] {
+        var out: [Byte] = []
         encode(value, &out)
         return out
     }
@@ -104,7 +104,7 @@ extension Binary.Coder {
     ///   - value: The value to encode.
     ///   - buffer: The buffer to append to.
     @inlinable
-    public func encodeAppending(_ value: Output, to buffer: inout [UInt8]) {
+    public func encodeAppending(_ value: Output, to buffer: inout [Byte]) {
         encode(value, &buffer)
     }
 }
@@ -121,7 +121,7 @@ extension Binary.Coder {
     @inlinable
     public static func machine(
         _ parser: Binary.Bytes.Machine.Parser<Output>,
-        encode: @escaping (Output, inout [UInt8]) -> Void
+        encode: @escaping (Output, inout [Byte]) -> Void
     ) -> Self {
         Self(
             decode: { input throws(Binary.Bytes.Machine.Fault) in
