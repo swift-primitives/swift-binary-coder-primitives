@@ -42,7 +42,7 @@ extension Binary {
     /// ```
     public struct Coder<Output>: Witness.`Protocol` {
         /// Decodes a value from a read-only byte cursor.
-        public var decode: (inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output
+        public var decode: (inout Byte.Input) throws(Binary.Machine.Fault) -> Output
 
         /// Encodes a value into a mutable byte buffer.
         public var encode: (Output, inout [Byte]) -> Void
@@ -50,7 +50,7 @@ extension Binary {
         /// Creates a coder with the given decode and encode operations.
         @inlinable
         public init(
-            decode: @escaping (inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output,
+            decode: @escaping (inout Byte.Input) throws(Binary.Machine.Fault) -> Output,
             encode: @escaping (Output, inout [Byte]) -> Void
         ) {
             self.decode = decode
@@ -66,9 +66,9 @@ extension Binary.Coder {
     ///
     /// - Parameter bytes: The bytes to decode.
     /// - Returns: The decoded value.
-    /// - Throws: `Binary.Bytes.Machine.Fault` if decoding fails or bytes remain.
+    /// - Throws: `Binary.Machine.Fault` if decoding fails or bytes remain.
     @inlinable
-    public func decodeWhole(_ bytes: [Byte]) throws(Binary.Bytes.Machine.Fault) -> Output {
+    public func decodeWhole(_ bytes: [Byte]) throws(Binary.Machine.Fault) -> Output {
         var input = Byte.Input(bytes)
         let value = try decode(&input)
         guard input.isEmpty else {
@@ -81,9 +81,9 @@ extension Binary.Coder {
     ///
     /// - Parameter input: The byte cursor to decode from.
     /// - Returns: The decoded value.
-    /// - Throws: `Binary.Bytes.Machine.Fault` if decoding fails.
+    /// - Throws: `Binary.Machine.Fault` if decoding fails.
     @inlinable
-    public func decodePrefix(_ input: inout Byte.Input) throws(Binary.Bytes.Machine.Fault) -> Output {
+    public func decodePrefix(_ input: inout Byte.Input) throws(Binary.Machine.Fault) -> Output {
         try decode(&input)
     }
 
@@ -120,11 +120,11 @@ extension Binary.Coder {
     /// - Returns: A coder wrapping the parser.
     @inlinable
     public static func machine(
-        _ parser: Binary.Bytes.Machine.Parser<Output>,
+        _ parser: Binary.Machine.Parser<Output>,
         encode: @escaping (Output, inout [Byte]) -> Void
     ) -> Self {
         Self(
-            decode: { input throws(Binary.Bytes.Machine.Fault) in
+            decode: { input throws(Binary.Machine.Fault) in
                 try parser.parse(&input)
             },
             encode: encode

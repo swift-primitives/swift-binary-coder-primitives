@@ -12,7 +12,7 @@ import Testing
 // Exercises the refined `parse(_:)` and `serialize(_:into:)` methods
 // directly (inherited via [FAM-006] from Parser.Protocol +
 // Serializer.Protocol) with the unified
-// `Either<Binary.Bytes.Machine.Fault, Never>` failure type.
+// `Either<Binary.Machine.Fault, Never>` failure type.
 //
 // Note: Encode direction is infallible (Either<X, Never>), so callers
 // can extract the parse-side fault unconditionally via .value (per
@@ -31,7 +31,7 @@ extension BinaryCoderProtocolTests.Unit {
     @Test
     func `parse via Coder.Protocol surface decodes complete input`() throws {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
         var input = Byte.Input([0x42])
@@ -44,7 +44,7 @@ extension BinaryCoderProtocolTests.Unit {
     @Test
     func `serialize via Coder.Protocol surface appends bytes to buffer`() throws {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
         var buffer: [UInt8] = [0x00, 0x01]
@@ -57,7 +57,7 @@ extension BinaryCoderProtocolTests.Unit {
     @Test
     func `round-trip via Coder.Protocol surface preserves value`() throws {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
 
@@ -78,7 +78,7 @@ extension BinaryCoderProtocolTests.EdgeCase {
     @Test
     func `parse via Coder.Protocol surface throws Either left on empty input`() throws {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
         var input = Byte.Input([])
@@ -87,9 +87,9 @@ extension BinaryCoderProtocolTests.EdgeCase {
             _ = try coder.parse(&input)
             Issue.record("Expected parse to throw on empty input")
         } catch let failure {
-            // Failure is Either<Binary.Bytes.Machine.Fault, Never>.
+            // Failure is Either<Binary.Machine.Fault, Never>.
             // Since Right == Never, .value extracts the Fault directly.
-            let fault: Binary.Bytes.Machine.Fault = failure.value
+            let fault: Binary.Machine.Fault = failure.value
             _ = fault
         }
     }

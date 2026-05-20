@@ -24,7 +24,7 @@ extension BinaryCoderTests.Unit {
     @Test
     func `decodeWhole decodes complete input`() throws {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
 
@@ -36,7 +36,7 @@ extension BinaryCoderTests.Unit {
     @Test
     func `decodePrefix consumes only needed bytes`() throws {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
         var input = Byte.Input([0x42, 0xFF, 0xFF])
@@ -50,7 +50,7 @@ extension BinaryCoderTests.Unit {
     @Test
     func `encodeToArray creates new array`() {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
 
@@ -62,7 +62,7 @@ extension BinaryCoderTests.Unit {
     @Test
     func `encodeAppending appends to existing buffer`() {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
         var buffer: [UInt8] = [0x00, 0x01]
@@ -80,11 +80,11 @@ extension BinaryCoderTests.EdgeCase {
     @Test
     func `decodeWhole throws when bytes remain`() {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
 
-        #expect(throws: Binary.Bytes.Machine.Fault.self) {
+        #expect(throws: Binary.Machine.Fault.self) {
             try coder.decodeWhole([0x42, 0xFF])
         }
     }
@@ -92,11 +92,11 @@ extension BinaryCoderTests.EdgeCase {
     @Test
     func `decodeWhole throws on empty input when decode fails`() {
         let coder = Binary.Coder.machine(
-            Binary.Bytes.Machine.u8Parser(),
+            Binary.Machine.u8Parser(),
             encode: { value, output in output.append(value) }
         )
 
-        #expect(throws: Binary.Bytes.Machine.Fault.self) {
+        #expect(throws: Binary.Machine.Fault.self) {
             try coder.decodeWhole([])
         }
     }
@@ -104,7 +104,7 @@ extension BinaryCoderTests.EdgeCase {
     @Test
     func `encode empty value produces empty array`() {
         let coder = Binary.Coder<Void>(
-            decode: { _ throws(Binary.Bytes.Machine.Fault) in () },
+            decode: { _ throws(Binary.Machine.Fault) in () },
             encode: { _, _ in }
         )
 

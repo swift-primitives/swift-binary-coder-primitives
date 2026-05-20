@@ -11,7 +11,7 @@ public import Either_Primitives
 extension Binary.Coder: Coder.`Protocol` {
     public typealias Input   = Byte.Input
     public typealias Buffer  = [Byte]
-    public typealias Failure = Either<Binary.Bytes.Machine.Fault, Never>
+    public typealias Failure = Either<Binary.Machine.Fault, Never>
 
     @inlinable
     public func parse(_ input: inout Byte.Input) throws(Failure) -> Output {

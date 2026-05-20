@@ -33,7 +33,7 @@ extension Int8 {
     @inlinable
     public static func coder(endianness: Binary.Endianness) -> Binary.Coder<Int8> {
         Binary.Coder.machine(
-            Binary.Bytes.Machine.i8Parser(),
+            Binary.Machine.i8Parser(),
             encode: { value, output in
                 output.append(Byte(UInt8(bitPattern: value)))
             }
