@@ -22,11 +22,11 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(path: "../swift-binary-parser-primitives"),
-        .package(path: "../swift-input-primitives"),
-        .package(path: "../swift-witness-primitives"),
-        .package(path: "../swift-coder-primitives"),
-        .package(path: "../swift-either-primitives"),
+        .package(url: "https://github.com/swift-primitives/swift-binary-parser-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-input-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-witness-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-coder-primitives.git", branch: "main"),
+        .package(url: "https://github.com/swift-primitives/swift-either-primitives.git", branch: "main"),
     ],
     targets: [
         .target(
