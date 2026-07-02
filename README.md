@@ -100,7 +100,7 @@ Decoding throws `Binary.Machine.Fault` throughout — `decodeWhole` additionally
 ## Community
 
 <!-- BEGIN: discussion -->
-*Discussion thread will be created at first public flip.*
+*Discussion thread will be created at first public release.*
 <!-- END: discussion -->
 
 ## License
