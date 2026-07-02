@@ -11,10 +11,10 @@
 //  This witness separates these concerns cleanly.
 //
 
-public import Witness_Primitives
-public import Shared_Primitive
 public import Buffer_Linear_Primitive
 public import Buffer_Linear_Primitives
+public import Shared_Primitive
+public import Witness_Primitives
 
 extension Binary {
     /// A witness for bidirectional binary coding with separate input/output types.
