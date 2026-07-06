@@ -1,6 +1,6 @@
 # .github/metadata.yaml
 # Bootstrap stub — populate description / topics during release-readiness.
-description: "Binary coder primitives for Swift."
+description: "Bidirectional binary coding witness pairing a streaming decode cursor with an appendable encode buffer for Swift."
 topics:
   - primitives
   - binary
