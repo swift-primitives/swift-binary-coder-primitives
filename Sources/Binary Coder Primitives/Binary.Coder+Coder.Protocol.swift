@@ -23,7 +23,7 @@ extension Binary.Coder: Coder.`Protocol` {
     /// - Throws: `.left(Binary.Machine.Fault)` when decoding fails.
     @inlinable
     public func parse(_ input: inout Byte.Input) throws(Failure) -> Output {
-        do {
+        do throws(Binary.Machine.Fault) {
             return try self.decode(&input)  // stored closure, unchanged
         } catch {
             throw .left(error)
