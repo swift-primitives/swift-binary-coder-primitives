@@ -83,13 +83,13 @@ extension BinaryCoderProtocolTests.EdgeCase {
         )
         var input = Byte.Input([])
 
-        do {
+        do throws(Either<Binary.Machine.Fault, Never>) {
             _ = try coder.parse(&input)
             Issue.record("Expected parse to throw on empty input")
-        } catch let failure {
+        } catch {
             // Failure is Either<Binary.Machine.Fault, Never>.
             // Since Right == Never, .value extracts the Fault directly.
-            let fault: Binary.Machine.Fault = failure.value
+            let fault: Binary.Machine.Fault = error.value
             _ = fault
         }
     }
