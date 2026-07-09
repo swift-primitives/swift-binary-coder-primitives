@@ -9,8 +9,7 @@ import Testing
 // Note: Binary.Coder<Value> is generic, so per [TEST-004] we use
 // parallel namespace pattern instead of type extension pattern.
 
-@Suite("Binary.Coder")
-struct BinaryCoderTests {
+@Suite struct `Binary.Coder Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
     @Suite struct Integration {}
@@ -19,7 +18,7 @@ struct BinaryCoderTests {
 
 // MARK: - Unit Tests
 
-extension BinaryCoderTests.Unit {
+extension `Binary.Coder Tests`.Unit {
 
     @Test
     func `decodeWhole decodes complete input`() throws {
@@ -75,7 +74,7 @@ extension BinaryCoderTests.Unit {
 
 // MARK: - EdgeCase Tests
 
-extension BinaryCoderTests.EdgeCase {
+extension `Binary.Coder Tests`.EdgeCase {
 
     @Test
     func `decodeWhole throws when bytes remain`() {
@@ -116,7 +115,7 @@ extension BinaryCoderTests.EdgeCase {
 
 // MARK: - Integration Tests
 
-extension BinaryCoderTests.Integration {
+extension `Binary.Coder Tests`.Integration {
 
     @Test
     func `round trip UInt16 little endian`() throws {

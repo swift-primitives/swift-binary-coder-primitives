@@ -18,15 +18,14 @@ import Testing
 // can extract the parse-side fault unconditionally via .value (per
 // Either+Never.swift in swift-either-primitives).
 
-@Suite("Binary.Coder.Protocol")
-struct BinaryCoderProtocolTests {
+@Suite struct `Binary.Coder.Protocol Tests` {
     @Suite struct Unit {}
     @Suite struct EdgeCase {}
 }
 
 // MARK: - Unit Tests
 
-extension BinaryCoderProtocolTests.Unit {
+extension `Binary.Coder.Protocol Tests`.Unit {
 
     @Test
     func `parse via Coder.Protocol surface decodes complete input`() throws {
@@ -73,7 +72,7 @@ extension BinaryCoderProtocolTests.Unit {
 
 // MARK: - EdgeCase Tests
 
-extension BinaryCoderProtocolTests.EdgeCase {
+extension `Binary.Coder.Protocol Tests`.EdgeCase {
 
     @Test
     func `parse via Coder.Protocol surface throws Either left on empty input`() throws {
