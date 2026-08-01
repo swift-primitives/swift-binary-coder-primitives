@@ -15,6 +15,8 @@ extension Binary.Coder: Coder.`Protocol` {
     public typealias Buffer = [Byte]
     /// Decoding throws `Binary.Machine.Fault`; encoding never fails.
     public typealias Failure = Either<Binary.Machine.Fault, Never>
+    /// This leaf conformer has no delegating `body`.
+    public typealias Body = Never
 
     /// Decodes a value from the byte cursor via the stored ``decode`` closure.
     ///

@@ -6,21 +6,24 @@ import Testing
 
 // MARK: - Integer Coder Tests
 
-@Suite("Integer Coders")
-struct IntegerCoderTests {
-    @Suite struct UInt8Tests {}
-    @Suite struct UInt16Tests {}
-    @Suite struct UInt32Tests {}
-    @Suite struct UInt64Tests {}
-    @Suite struct Int8Tests {}
-    @Suite struct Int16Tests {}
-    @Suite struct Int32Tests {}
-    @Suite struct Int64Tests {}
+@Suite
+struct `Integer Coder Tests` {
+    @Suite struct Unit {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
+    @Suite struct `UInt8 Tests` {}
+    @Suite struct `UInt16 Tests` {}
+    @Suite struct `UInt32 Tests` {}
+    @Suite struct `UInt64 Tests` {}
+    @Suite struct `Int8 Tests` {}
+    @Suite struct `Int16 Tests` {}
+    @Suite struct `Int32 Tests` {}
+    @Suite struct `Int64 Tests` {}
 }
 
 // MARK: - UInt8 Tests
 
-extension IntegerCoderTests.UInt8Tests {
+extension `Integer Coder Tests`.`UInt8 Tests` {
 
     @Test
     func `decode single byte`() throws {
@@ -72,7 +75,7 @@ extension IntegerCoderTests.UInt8Tests {
 
 // MARK: - UInt16 Tests
 
-extension IntegerCoderTests.UInt16Tests {
+extension `Integer Coder Tests`.`UInt16 Tests` {
 
     @Test
     func `decode big endian`() throws {
@@ -135,7 +138,7 @@ extension IntegerCoderTests.UInt16Tests {
 
 // MARK: - UInt32 Tests
 
-extension IntegerCoderTests.UInt32Tests {
+extension `Integer Coder Tests`.`UInt32 Tests` {
 
     @Test
     func `decode big endian`() throws {
@@ -187,7 +190,7 @@ extension IntegerCoderTests.UInt32Tests {
 
 // MARK: - UInt64 Tests
 
-extension IntegerCoderTests.UInt64Tests {
+extension `Integer Coder Tests`.`UInt64 Tests` {
 
     @Test
     func `decode big endian`() throws {
@@ -221,7 +224,7 @@ extension IntegerCoderTests.UInt64Tests {
 
 // MARK: - Int8 Tests
 
-extension IntegerCoderTests.Int8Tests {
+extension `Integer Coder Tests`.`Int8 Tests` {
 
     @Test
     func `decode positive value`() throws {
@@ -264,7 +267,7 @@ extension IntegerCoderTests.Int8Tests {
 
 // MARK: - Int16 Tests
 
-extension IntegerCoderTests.Int16Tests {
+extension `Integer Coder Tests`.`Int16 Tests` {
 
     @Test
     func `decode positive big endian`() throws {
@@ -298,7 +301,7 @@ extension IntegerCoderTests.Int16Tests {
 
 // MARK: - Int32 Tests
 
-extension IntegerCoderTests.Int32Tests {
+extension `Integer Coder Tests`.`Int32 Tests` {
 
     @Test
     func `decode negative value big endian`() throws {
@@ -323,7 +326,7 @@ extension IntegerCoderTests.Int32Tests {
 
 // MARK: - Int64 Tests
 
-extension IntegerCoderTests.Int64Tests {
+extension `Integer Coder Tests`.`Int64 Tests` {
 
     @Test
     func `decode max value`() throws {

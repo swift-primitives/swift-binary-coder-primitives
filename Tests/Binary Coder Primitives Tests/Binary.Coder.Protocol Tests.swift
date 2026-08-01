@@ -20,7 +20,8 @@ import Testing
 
 @Suite struct `Binary.Coder.Protocol Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
+    @Suite struct Integration {}
 }
 
 // MARK: - Unit Tests
@@ -72,7 +73,7 @@ extension `Binary.Coder.Protocol Tests`.Unit {
 
 // MARK: - EdgeCase Tests
 
-extension `Binary.Coder.Protocol Tests`.EdgeCase {
+extension `Binary.Coder.Protocol Tests`.`Edge Case` {
 
     @Test
     func `parse via Coder.Protocol surface throws Either left on empty input`() throws {

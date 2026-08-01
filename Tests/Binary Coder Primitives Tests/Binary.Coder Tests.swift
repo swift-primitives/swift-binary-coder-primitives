@@ -11,7 +11,7 @@ import Testing
 
 @Suite struct `Binary.Coder Tests` {
     @Suite struct Unit {}
-    @Suite struct EdgeCase {}
+    @Suite struct `Edge Case` {}
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
@@ -74,7 +74,7 @@ extension `Binary.Coder Tests`.Unit {
 
 // MARK: - EdgeCase Tests
 
-extension `Binary.Coder Tests`.EdgeCase {
+extension `Binary.Coder Tests`.`Edge Case` {
 
     @Test
     func `decodeWhole throws when bytes remain`() {
