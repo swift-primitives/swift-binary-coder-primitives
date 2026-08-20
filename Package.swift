@@ -1,15 +1,15 @@
-// swift-tools-version: 6.3.3
+// swift-tools-version: 6.4
 
 import PackageDescription
 
 let package = Package(
     name: "swift-binary-coder-primitives",
     platforms: [
-        .macOS("27"),
-        .iOS("27"),
-        .tvOS("27"),
-        .watchOS("27"),
-        .visionOS("27")
+        .macOS(.v27),
+        .iOS(.v27),
+        .tvOS(.v27),
+        .watchOS(.v27),
+        .visionOS(.v27),
     ],
     products: [
         .library(
@@ -22,26 +22,62 @@ let package = Package(
         ),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-primitives/swift-binary-parser-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-input-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-witness-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-coder-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-either-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-ownership-shared-primitives.git", branch: "main"),
-        .package(url: "https://github.com/swift-primitives/swift-buffer-linear-primitives.git", branch: "main"),
+        .package(
+            url: "https://github.com/swift-primitives/swift-binary-parser-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-input-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-witness-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-coder-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-either-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-ownership-shared-primitives.git",
+            branch: "main"
+        ),
+        .package(
+            url: "https://github.com/swift-primitives/swift-buffer-linear-primitives.git",
+            branch: "main"
+        ),
     ],
     targets: [
         .target(
             name: "Binary Coder Primitives",
             dependencies: [
-                .product(name: "Binary Input Primitives", package: "swift-binary-parser-primitives"),
-                .product(name: "Binary Machine Primitives", package: "swift-binary-parser-primitives"),
+                .product(
+                    name: "Binary Input Primitives",
+                    package: "swift-binary-parser-primitives"
+                ),
+                .product(
+                    name: "Binary Machine Primitives",
+                    package: "swift-binary-parser-primitives"
+                ),
                 .product(name: "Witness Primitives", package: "swift-witness-primitives"),
                 .product(name: "Coder Primitives", package: "swift-coder-primitives"),
                 .product(name: "Either Primitives", package: "swift-either-primitives"),
-                .product(name: "Ownership Shared Primitive", package: "swift-ownership-shared-primitives"),
-                .product(name: "Buffer Linear Primitive", package: "swift-buffer-linear-primitives"),
-                .product(name: "Buffer Linear Primitives", package: "swift-buffer-linear-primitives"),
+                .product(
+                    name: "Ownership Shared Primitive",
+                    package: "swift-ownership-shared-primitives"
+                ),
+                .product(
+                    name: "Buffer Linear Primitive",
+                    package: "swift-buffer-linear-primitives"
+                ),
+                .product(
+                    name: "Buffer Linear Primitives",
+                    package: "swift-buffer-linear-primitives"
+                ),
             ]
         ),
         .target(
@@ -56,7 +92,10 @@ let package = Package(
             dependencies: [
                 "Binary Coder Primitives",
                 "Binary Integer Coder Primitives",
-                .product(name: "Binary Parser Primitives Test Support", package: "swift-binary-parser-primitives"),
+                .product(
+                    name: "Binary Parser Primitives Test Support",
+                    package: "swift-binary-parser-primitives"
+                ),
             ]
         ),
     ],
