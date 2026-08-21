@@ -1,32 +1,8 @@
-//
-//  UInt32+Coder.swift
-//  swift-binary-coder-primitives
-//
-//  Binary coder for UInt32 serialization.
-//
-
 public import Binary_Coder_Primitives
 import Input_Primitives
 
 extension UInt32 {
-    /// Returns a coder for reading/writing four bytes as `UInt32`.
-    ///
-    /// ## Example
-    ///
-    /// ```swift
-    /// let coder = UInt32.coder(endianness: .little)
-    ///
-    /// // Decode
-    /// let bytes: [UInt8] = [0x78, 0x56, 0x34, 0x12]
-    /// var input = Input.Slice(bytes[...])
-    /// let value = try coder.decodePrefix(&input)
-    /// // value == 0x12345678
-    ///
-    /// // Encode
-    /// var output: [UInt8] = []
-    /// coder.encodeAppending(0x12345678, to: &output)
-    /// // output == [0x78, 0x56, 0x34, 0x12] (little-endian)
-    /// ```
+
     @inlinable
     public static func coder(endianness: Binary.Endianness) -> Binary.Coder<UInt32> {
         let parser: Binary.Machine.Parser<UInt32> =

@@ -5,26 +5,11 @@ import Testing
 
 @testable import Binary_Coder_Primitives
 
-// MARK: - Binary.Coder.Protocol Tests
-//
-// Tests for Binary.Coder's Coder.Protocol-surface API.
-//
-// Exercises the refined `parse(_:)` and `serialize(_:into:)` methods
-// directly (inherited via [FAM-006] from Parser.Protocol +
-// Serializer.Protocol) with the unified
-// `Either<Binary.Machine.Fault, Never>` failure type.
-//
-// Note: Encode direction is infallible (Either<X, Never>), so callers
-// can extract the parse-side fault unconditionally via .value (per
-// Either+Never.swift in swift-either-primitives).
-
 @Suite struct `Binary.Coder.Protocol Tests` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
 }
-
-// MARK: - Unit Tests
 
 extension `Binary.Coder.Protocol Tests`.Unit {
 
@@ -71,8 +56,6 @@ extension `Binary.Coder.Protocol Tests`.Unit {
     }
 }
 
-// MARK: - EdgeCase Tests
-
 extension `Binary.Coder.Protocol Tests`.`Edge Case` {
 
     @Test
@@ -87,8 +70,7 @@ extension `Binary.Coder.Protocol Tests`.`Edge Case` {
             _ = try coder.parse(&input)
             Issue.record("Expected parse to throw on empty input")
         } catch {
-            // Failure is Either<Binary.Machine.Fault, Never>.
-            // Since Right == Never, .value extracts the Fault directly.
+
             let fault: Binary.Machine.Fault = error.value
             _ = fault
         }

@@ -1,32 +1,8 @@
-//
-//  UInt16+Coder.swift
-//  swift-binary-coder-primitives
-//
-//  Binary coder for UInt16 serialization.
-//
-
 public import Binary_Coder_Primitives
 import Input_Primitives
 
 extension UInt16 {
-    /// Returns a coder for reading/writing two bytes as `UInt16`.
-    ///
-    /// ## Example
-    ///
-    /// ```swift
-    /// let coder = UInt16.coder(endianness: .little)
-    ///
-    /// // Decode
-    /// let bytes: [Byte] = [0x34, 0x12, 0x00]
-    /// var input = Input.Slice(bytes[...])
-    /// let value = try coder.decodePrefix(&input)
-    /// // value == 0x1234, input has [0x00] remaining
-    ///
-    /// // Encode
-    /// var output: [Byte] = []
-    /// coder.encodeAppending(0x1234, to: &output)
-    /// // output == [0x34, 0x12] (little-endian)
-    /// ```
+
     @inlinable
     public static func coder(endianness: Binary.Endianness) -> Binary.Coder<UInt16> {
         let parser: Binary.Machine.Parser<UInt16> =

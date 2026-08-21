@@ -1,32 +1,8 @@
-//
-//  Int64+Coder.swift
-//  swift-binary-coder-primitives
-//
-//  Binary coder for Int64 serialization.
-//
-
 public import Binary_Coder_Primitives
 import Input_Primitives
 
 extension Int64 {
-    /// Returns a coder for reading/writing eight bytes as `Int64`.
-    ///
-    /// ## Example
-    ///
-    /// ```swift
-    /// let coder = Int64.coder(endianness: .big)
-    ///
-    /// // Decode
-    /// let bytes: [UInt8] = [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE]
-    /// var input = Input.Slice(bytes[...])
-    /// let value = try coder.decodePrefix(&input)
-    /// // value == -2
-    ///
-    /// // Encode
-    /// var output: [UInt8] = []
-    /// coder.encodeAppending(-2, to: &output)
-    /// // output == [0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFE] (big-endian)
-    /// ```
+
     @inlinable
     public static func coder(endianness: Binary.Endianness) -> Binary.Coder<Int64> {
         let parser: Binary.Machine.Parser<Int64> =

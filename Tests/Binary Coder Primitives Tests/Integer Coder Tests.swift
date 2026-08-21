@@ -4,8 +4,6 @@ import Testing
 
 @testable import Binary_Coder_Primitives
 
-// MARK: - Integer Coder Tests
-
 @Suite
 struct `Integer Coder Tests` {
     @Suite struct Unit {}
@@ -20,8 +18,6 @@ struct `Integer Coder Tests` {
     @Suite struct `Int32 Tests` {}
     @Suite struct `Int64 Tests` {}
 }
-
-// MARK: - UInt8 Tests
 
 extension `Integer Coder Tests`.`UInt8 Tests` {
 
@@ -72,8 +68,6 @@ extension `Integer Coder Tests`.`UInt8 Tests` {
         #expect(value == UInt8.max)
     }
 }
-
-// MARK: - UInt16 Tests
 
 extension `Integer Coder Tests`.`UInt16 Tests` {
 
@@ -136,8 +130,6 @@ extension `Integer Coder Tests`.`UInt16 Tests` {
     }
 }
 
-// MARK: - UInt32 Tests
-
 extension `Integer Coder Tests`.`UInt32 Tests` {
 
     @Test
@@ -188,8 +180,6 @@ extension `Integer Coder Tests`.`UInt32 Tests` {
     }
 }
 
-// MARK: - UInt64 Tests
-
 extension `Integer Coder Tests`.`UInt64 Tests` {
 
     @Test
@@ -221,8 +211,6 @@ extension `Integer Coder Tests`.`UInt64 Tests` {
         #expect(decoded == original)
     }
 }
-
-// MARK: - Int8 Tests
 
 extension `Integer Coder Tests`.`Int8 Tests` {
 
@@ -265,8 +253,6 @@ extension `Integer Coder Tests`.`Int8 Tests` {
     }
 }
 
-// MARK: - Int16 Tests
-
 extension `Integer Coder Tests`.`Int16 Tests` {
 
     @Test
@@ -299,8 +285,6 @@ extension `Integer Coder Tests`.`Int16 Tests` {
     }
 }
 
-// MARK: - Int32 Tests
-
 extension `Integer Coder Tests`.`Int32 Tests` {
 
     @Test
@@ -323,8 +307,6 @@ extension `Integer Coder Tests`.`Int32 Tests` {
         #expect(decoded == original)
     }
 }
-
-// MARK: - Int64 Tests
 
 extension `Integer Coder Tests`.`Int64 Tests` {
 

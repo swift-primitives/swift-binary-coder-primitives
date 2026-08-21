@@ -4,19 +4,12 @@ import Testing
 
 @testable import Binary_Coder_Primitives
 
-// MARK: - Binary.Coder Tests
-
-// Note: Binary.Coder<Value> is generic, so per [TEST-004] we use
-// parallel namespace pattern instead of type extension pattern.
-
 @Suite struct `Binary.Coder Tests` {
     @Suite struct Unit {}
     @Suite struct `Edge Case` {}
     @Suite struct Integration {}
     @Suite(.serialized) struct Performance {}
 }
-
-// MARK: - Unit Tests
 
 extension `Binary.Coder Tests`.Unit {
 
@@ -72,8 +65,6 @@ extension `Binary.Coder Tests`.Unit {
     }
 }
 
-// MARK: - EdgeCase Tests
-
 extension `Binary.Coder Tests`.`Edge Case` {
 
     @Test
@@ -112,8 +103,6 @@ extension `Binary.Coder Tests`.`Edge Case` {
         #expect(bytes.isEmpty)
     }
 }
-
-// MARK: - Integration Tests
 
 extension `Binary.Coder Tests`.Integration {
 
